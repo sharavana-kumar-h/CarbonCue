@@ -33,6 +33,6 @@
   },
   "description": "An explainable, local-first carbon footprint awareness platform.",
   "engines": {
-    "node": ">=20"
+    "node": "22.x"
   }
 }
