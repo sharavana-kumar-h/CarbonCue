@@ -3,15 +3,20 @@
   "private": true,
   "version": "1.2.0",
   "type": "module",
+  "description": "An explainable, local-first carbon footprint awareness platform.",
+  "packageManager": "pnpm@10.12.1",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "verify": "npm test && npm run build",
+    "verify": "pnpm test && pnpm run build",
     "repo:check": "node scripts/repository-check.mjs",
-    "release:check": "npm audit --audit-level=high && npm run verify && npm run repo:check"
+    "release:check": "pnpm audit --audit-level=high && pnpm run verify && pnpm run repo:check"
   },
   "dependencies": {
     "lucide-react": "0.468.0",
@@ -30,9 +35,6 @@
     "typescript": "5.7.2",
     "vite": "7.3.5",
     "vitest": "4.1.8"
-  },
-  "description": "An explainable, local-first carbon footprint awareness platform.",
-  "engines": {
-    "node": "22.x"
   }
 }
+
