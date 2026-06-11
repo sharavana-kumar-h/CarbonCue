@@ -31,6 +31,7 @@ The persona may live in a hostel, PG, rented home or family home; use mixed tran
 - Category-level footprint breakdown
 - High, medium and low confidence labels
 - Dynamic coach answering four practical questions
+- Weekly action commitment loop with contextual nudges and completion tracking
 - Context-aware ranked actions with visible reasoning
 - Personalized what-if scenarios normalized to the latest seven-day activity window
 - Open methodology and source notes
@@ -63,6 +64,7 @@ Examples:
 - Red-meat scenarios appear only for mixed-diet users who recorded red-meat meals.
 - Shared electricity savings are allocated across the entered household size.
 - Historical entries outside the latest seven-day window do not inflate weekly action estimates.
+- A recommendation can be converted into a weekly commitment, then completed or skipped, so the behavior-change loop is visible instead of only advisory.
 
 A simplified ranking model is:
 
@@ -138,7 +140,7 @@ src/
 
 ## Run locally
 
-Requirements: Node.js 20 or newer.
+Requirements: Node.js 22.x.
 
 ```bash
 npm ci
@@ -155,7 +157,7 @@ npm run verify
 npm run repo:check
 ```
 
-The current suite contains **29 automated tests** across calculations, ranking, personalized scenarios, malformed persisted data, evaluator interactions and axe-core structural accessibility.
+The current suite contains **31 automated tests** across calculations, ranking, personalized scenarios, malformed persisted data, evaluator interactions and axe-core structural accessibility.
 
 ## Direct evaluator route
 
@@ -218,6 +220,7 @@ See [`SECURITY.md`](SECURITY.md).
 - [`docs/JUDGES_QUICKSTART.md`](docs/JUDGES_QUICKSTART.md) — fastest evaluator path
 - [`docs/EVALUATION.md`](docs/EVALUATION.md) — scoring-area evidence map
 - [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) — 75-second walkthrough
+- [`docs/AI_BUILD_JOURNEY.md`](docs/AI_BUILD_JOURNEY.md) — prompt evolution, AI tool usage and build decisions
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — GitHub and Vercel procedure
 - [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md) — final gate
 - [`docs/LINKEDIN_POST_TEMPLATE.md`](docs/LINKEDIN_POST_TEMPLATE.md) — public build post
