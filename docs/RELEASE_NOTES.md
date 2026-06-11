@@ -1,5 +1,16 @@
 # Release notes
 
+## v1.3.0 — Behavioral-change loop and AI build evidence
+
+- Added a weekly action commitment loop that converts recommendations into one explicit action.
+- Added contextual nudges when the user has recent activity in the same category as the active commitment.
+- Added completion and skip states for the weekly action.
+- Added validation for weekly-action data loaded from browser storage.
+- Added `docs/AI_BUILD_JOURNEY.md` to document AI tools, prompt evolution, architecture decisions and trade-offs.
+- Added two regression tests for weekly-action persistence and UI completion flow.
+- Increased the verified test suite from 29 to 31 tests.
+
+
 ## v1.2.0 — Evaluator access and repository integrity
 
 - Added a direct `?demo=1` route for a zero-setup populated dashboard.

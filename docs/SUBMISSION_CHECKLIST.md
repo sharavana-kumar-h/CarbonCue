@@ -5,7 +5,7 @@
 - [ ] Run `npm ci`.
 - [ ] Run `npm audit --audit-level=high`.
 - [ ] Run `npm run verify`.
-- [ ] Confirm all 29 tests pass.
+- [ ] Confirm all 31 tests pass.
 - [ ] Run `npm run repo:check`.
 - [ ] Confirm `git status` is clean.
 
@@ -30,6 +30,7 @@
 - [ ] Test **Start with my own data** from the sample banner.
 - [ ] Test **Explore with sample data** from onboarding.
 - [ ] Confirm the seven-day chart and previous-week comparison appear.
+- [ ] Commit to one recommendation and mark the weekly action completed.
 - [ ] Add one backdated activity and confirm it appears on the correct day.
 - [ ] Test all four coach questions.
 - [ ] Confirm the vegetarian demo has no red-meat simulator option.
@@ -41,7 +42,7 @@
 - [ ] Set the audience to **Anyone**.
 - [ ] Include a dashboard screenshot or short demo video.
 - [ ] Explain the persona and the decision engine.
-- [ ] Mention explainability, seven-day progress, direct evaluator access, local-first privacy and 29 tests.
+- [ ] Mention explainability, seven-day progress, direct evaluator access, local-first privacy and 31 tests.
 - [ ] Add the final GitHub and deployment links.
 - [ ] Verify the post URL while logged out.
 

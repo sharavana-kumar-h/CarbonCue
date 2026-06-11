@@ -41,9 +41,23 @@ export interface EnergyActivity extends BaseActivity {
 
 export type Activity = TransportActivity | FoodActivity | EnergyActivity;
 
+export type WeeklyActionStatus = 'active' | 'completed' | 'skipped';
+
+export interface WeeklyAction {
+  id: string;
+  recommendationId: string;
+  title: string;
+  category: Category;
+  weeklySavingKg: number;
+  startedOn: string;
+  status: WeeklyActionStatus;
+  completedOn?: string;
+}
+
 export interface AppState {
   profile: Profile | null;
   activities: Activity[];
+  weeklyAction?: WeeklyAction | null;
   mode?: 'personal' | 'demo';
 }
 

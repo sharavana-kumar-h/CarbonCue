@@ -6,7 +6,8 @@ import type {
   FoodType,
   Housing,
   Profile,
-  TransportMode
+  TransportMode,
+  WeeklyAction
 } from '../types';
 
 const STORAGE_KEY = 'carboncue:v1';
@@ -18,6 +19,8 @@ const budgets: Budget[] = ['free-only', 'low', 'flexible'];
 const goals: Profile['goal'][] = ['learn', 'reduce', 'track'];
 const transportModes: TransportMode[] = ['walk', 'bicycle', 'bus', 'metro', 'motorbike', 'car', 'taxi'];
 const foodTypes: FoodType[] = ['plant-based', 'vegetarian', 'chicken', 'red-meat', 'packaged'];
+const categories = ['transport', 'food', 'energy'] as const;
+const weeklyActionStatuses = ['active', 'completed', 'skipped'] as const;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
@@ -47,6 +50,29 @@ function hasValidBaseActivity(value: Record<string, unknown>): boolean {
     && value.id.length <= 100
     && typeof value.date === 'string'
     && /^\d{4}-\d{2}-\d{2}$/.test(value.date);
+}
+
+function isWeeklyAction(value: unknown): value is WeeklyAction {
+  if (!isRecord(value)) return false;
+
+  const completedOnValid = value.completedOn === undefined
+    || (typeof value.completedOn === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value.completedOn));
+
+  return typeof value.id === 'string'
+    && value.id.length > 0
+    && value.id.length <= 100
+    && typeof value.recommendationId === 'string'
+    && value.recommendationId.length > 0
+    && value.recommendationId.length <= 100
+    && typeof value.title === 'string'
+    && value.title.length > 0
+    && value.title.length <= 140
+    && isStringIn(value.category, categories)
+    && isFiniteNumber(value.weeklySavingKg, 0, 1000)
+    && typeof value.startedOn === 'string'
+    && /^\d{4}-\d{2}-\d{2}$/.test(value.startedOn)
+    && isStringIn(value.status, weeklyActionStatuses)
+    && completedOnValid;
 }
 
 function isActivity(value: unknown): value is Activity {
@@ -87,8 +113,11 @@ export function loadState(): AppState {
       : [];
 
     if (parsed.profile !== null && !profile) return EMPTY_STATE;
+    const weeklyAction = parsed.weeklyAction === null || parsed.weeklyAction === undefined
+      ? null
+      : isWeeklyAction(parsed.weeklyAction) ? parsed.weeklyAction : null;
     const mode = parsed.mode === 'demo' ? 'demo' : undefined;
-    return mode ? { profile, activities, mode } : { profile, activities };
+    return { profile, activities, weeklyAction, ...(mode ? { mode } : {}) };
   } catch {
     return EMPTY_STATE;
   }

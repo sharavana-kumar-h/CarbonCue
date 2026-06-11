@@ -1,9 +1,13 @@
 import { BadgeIndianRupee, ChevronRight, CircleHelp, Gauge } from 'lucide-react';
-import type { Recommendation } from '../types';
+import type { Recommendation, WeeklyAction } from '../types';
 
-interface Props { recommendations: Recommendation[]; }
+interface Props {
+  recommendations: Recommendation[];
+  weeklyAction?: WeeklyAction | null;
+  onCommit: (recommendation: Recommendation) => void;
+}
 
-export function Recommendations({ recommendations }: Props) {
+export function Recommendations({ recommendations, weeklyAction, onCommit }: Props) {
   return (
     <section className="panel recommendations-panel" aria-labelledby="recommendations-title">
       <div className="panel-heading">
@@ -23,6 +27,14 @@ export function Recommendations({ recommendations }: Props) {
               <div className="recommendation-detail">
                 <p><CircleHelp size={16} /><span><strong>Why this:</strong> {item.rationale}</span></p>
                 <div className="tags"><span><BadgeIndianRupee size={14} /> {item.cost}</span><span><Gauge size={14} /> {item.effort}</span><span>{item.confidence} confidence</span></div>
+                <button
+                  type="button"
+                  className="text-button aligned commit-button"
+                  onClick={() => onCommit(item)}
+                  disabled={weeklyAction?.status === 'active' && weeklyAction.recommendationId === item.id}
+                >
+                  {weeklyAction?.status === 'active' && weeklyAction.recommendationId === item.id ? 'Committed for this week' : 'Make this my weekly action'}
+                </button>
               </div>
             </details>
           ))}

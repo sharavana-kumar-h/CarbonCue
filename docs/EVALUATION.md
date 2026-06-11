@@ -28,7 +28,7 @@
 
 ## Testing
 
-Twenty-nine automated tests cover:
+Thirty-one automated tests cover:
 
 - Vehicle occupancy allocation
 - Shared household allocation
@@ -50,6 +50,8 @@ Twenty-nine automated tests cover:
 - Evaluator demo flow
 - Direct `?demo=1` routing over stale browser state
 - Sample-workspace disclosure and clean exit
+- Weekly action commitment, contextual nudges and completion tracking
+- Validation of persisted weekly-action data
 
 The UI suite uses Testing Library, user-event and axe-core. Browser-dependent colour contrast is still checked manually because jsdom does not calculate rendered contrast.
 
@@ -80,6 +82,8 @@ The GitHub Actions workflow runs dependency audit, tests, production build and r
 
 `src/engine/scenarios.ts` generates scenarios from the profile and actual logged activities. A vegetarian user is not shown a red-meat scenario, and travel substitutions appear only when relevant travel exists.
 
+The weekly action loop turns one recommendation into an explicit commitment. The dashboard then shows a category-specific nudge when relevant activity appears in the latest seven-day window and lets the user mark the action completed or skipped.
+
 ## Progress tracking
 
 `src/engine/trends.ts` creates a seven-day footprint window, compares it against the previous seven days and reports active-day coverage. The interface explicitly warns that missing days are not assumed to be zero-emission days. Recommendation and scenario engines use only the latest recorded seven-day window so older history cannot inflate weekly savings.
@@ -88,3 +92,7 @@ The GitHub Actions workflow runs dependency audit, tests, production build and r
 ## Evaluator access
 
 The deployed `?demo=1` route provides a zero-setup path to the populated dashboard. It is deliberately transparent: a visible banner identifies all entries as fictional, and the evaluator can return to clean onboarding without hunting for reset controls.
+
+## AI-assisted build process
+
+`docs/AI_BUILD_JOURNEY.md` documents the prompt-driven build process, AI tools used, weaknesses discovered during iteration and how the product evolved from a generic calculator into an explainable behavioral-change prototype.

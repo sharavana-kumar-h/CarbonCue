@@ -7,6 +7,7 @@ import { Coach } from './components/Coach';
 import { Onboarding } from './components/Onboarding';
 import { ProgressTrend } from './components/ProgressTrend';
 import { Recommendations } from './components/Recommendations';
+import { WeeklyAction } from './components/WeeklyAction';
 import { ScenarioSimulator } from './components/ScenarioSimulator';
 import { ELECTRICITY_FACTOR, FOOD_FACTORS, TRANSPORT_FACTORS } from './data/emissionFactors';
 import { useCarbonData } from './hooks/useCarbonData';
@@ -55,7 +56,18 @@ function App() {
               <div className="main-column">
                 <ActivityLogger onAdd={data.addActivity} />
                 <Coach activities={data.state.activities} results={data.results} summaries={data.summaries} recommendations={data.recommendations} confidence={data.confidence} />
-                <Recommendations recommendations={data.recommendations} />
+                <WeeklyAction
+                  weeklyAction={data.state.weeklyAction}
+                  recommendations={data.recommendations}
+                  activities={data.state.activities}
+                  onCommit={data.commitWeeklyAction}
+                  onUpdateStatus={data.updateWeeklyActionStatus}
+                />
+                <Recommendations
+                  recommendations={data.recommendations}
+                  weeklyAction={data.state.weeklyAction}
+                  onCommit={data.commitWeeklyAction}
+                />
                 <ActivityList activities={data.state.activities} results={data.results} onRemove={data.removeActivity} />
               </div>
               <aside className="side-column">

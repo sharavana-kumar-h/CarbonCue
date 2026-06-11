@@ -80,3 +80,49 @@ describe('persisted-state validation', () => {
     expect(state.activities[0].id).toBe('valid-trip');
   });
 });
+
+  it('keeps a valid weekly action and drops malformed action data', () => {
+    window.localStorage.setItem(key, JSON.stringify({
+      profile: {
+        housing: 'rented',
+        householdSize: 3,
+        diet: 'vegetarian',
+        budget: 'low',
+        goal: 'reduce'
+      },
+      activities: [],
+      weeklyAction: {
+        id: 'action-1',
+        recommendationId: 'carpool',
+        title: 'Share the highest-distance ride',
+        category: 'transport',
+        weeklySavingKg: 2.4,
+        startedOn: '2026-06-08',
+        status: 'active'
+      }
+    }));
+
+    expect(loadState().weeklyAction?.recommendationId).toBe('carpool');
+
+    window.localStorage.setItem(key, JSON.stringify({
+      profile: {
+        housing: 'rented',
+        householdSize: 3,
+        diet: 'vegetarian',
+        budget: 'low',
+        goal: 'reduce'
+      },
+      activities: [],
+      weeklyAction: {
+        id: 'action-2',
+        recommendationId: 'carpool',
+        title: 'x'.repeat(180),
+        category: 'invalid-category',
+        weeklySavingKg: -9,
+        startedOn: 'bad-date',
+        status: 'unknown'
+      }
+    }));
+
+    expect(loadState().weeklyAction).toBeNull();
+  });

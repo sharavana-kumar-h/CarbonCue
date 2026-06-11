@@ -7,9 +7,10 @@
 3. Review the total, category breakdown and seven-day comparison.
 4. Ask **What is my largest source?** in the coach.
 5. Expand the first recommendation to inspect its rationale.
-6. Change the scenario frequency and compare weekly and annual savings.
-7. Open **Methodology** to inspect factors, sources and limitations.
-8. Select **Start with my own data** to confirm the clean onboarding path.
+6. Commit to the first recommendation, inspect the contextual nudge and mark the weekly action completed.
+7. Change the scenario frequency and compare weekly and annual savings.
+8. Open **Methodology** to inspect factors, sources and limitations.
+9. Select **Start with my own data** to confirm the clean onboarding path.
 
 ## Suggested URLs
 

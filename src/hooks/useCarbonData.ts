@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { averageConfidence, calculateAllEmissions, calculateTotal, summarizeByCategory } from '../engine/calculateEmissions';
 import { rankRecommendations } from '../engine/rankRecommendations';
-import { buildTrendSummary } from '../engine/trends';
+import { buildTrendSummary, currentLocalIsoDate } from '../engine/trends';
 import { createDemoState } from '../data/demoState';
 import { clearState, loadState, saveState } from '../storage/localStorageRepository';
-import type { Activity, AppState, Profile } from '../types';
+import type { Activity, AppState, Profile, Recommendation, WeeklyActionStatus } from '../types';
 
 const initialState = (): AppState => {
   if (typeof window === 'undefined') return { profile: null, activities: [] };
@@ -41,12 +41,39 @@ export function useCarbonData() {
   const setProfile = (profile: Profile) => setState((current) => ({ ...current, profile, mode: 'personal' }));
   const addActivity = (activity: Activity) => setState((current) => ({
     ...current,
-    activities: [activity, ...current.activities].slice(0, 250)
+    activities: [activity, ...current.activities]
+      .slice(0, 250)
+      .sort((a, b) => b.date.localeCompare(a.date))
   }));
   const removeActivity = (id: string) => setState((current) => ({
     ...current,
     activities: current.activities.filter((activity) => activity.id !== id)
   }));
+  const commitWeeklyAction = (recommendation: Recommendation) => setState((current) => ({
+    ...current,
+    weeklyAction: {
+      id: crypto.randomUUID(),
+      recommendationId: recommendation.id,
+      title: recommendation.title,
+      category: recommendation.category,
+      weeklySavingKg: recommendation.estimatedWeeklySavingKg,
+      startedOn: currentLocalIsoDate(),
+      status: 'active'
+    }
+  }));
+
+  const updateWeeklyActionStatus = (status: WeeklyActionStatus) => setState((current) => {
+    if (!current.weeklyAction) return current;
+    return {
+      ...current,
+      weeklyAction: {
+        ...current.weeklyAction,
+        status,
+        completedOn: currentLocalIsoDate()
+      }
+    };
+  });
+
   const reset = () => {
     clearState();
     if (typeof window !== 'undefined') {
@@ -56,7 +83,7 @@ export function useCarbonData() {
         window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
       }
     }
-    setState({ profile: null, activities: [], mode: 'personal' });
+    setState({ profile: null, activities: [], weeklyAction: null, mode: 'personal' });
   };
   const loadDemo = () => setState(createDemoState());
 
@@ -72,6 +99,8 @@ export function useCarbonData() {
     setProfile,
     addActivity,
     removeActivity,
+    commitWeeklyAction,
+    updateWeeklyActionStatus,
     reset,
     loadDemo
   };

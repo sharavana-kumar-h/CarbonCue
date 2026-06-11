@@ -51,11 +51,12 @@ Open the final URL in a logged-out/incognito browser and verify:
 4. **Start with my own data** returns to onboarding.
 5. The seven-day chart and previous-week comparison render.
 6. The coach answers all four questions.
-7. The simulator excludes irrelevant scenarios for the vegetarian demo profile.
-8. Methodology opens and shows factor assumptions.
-9. Refresh preserves the selected workspace locally.
-10. Reset deletes the local state.
-11. The mobile layout has no horizontal overflow.
+7. A recommendation can be committed as a weekly action and marked completed.
+8. The simulator excludes irrelevant scenarios for the vegetarian demo profile.
+9. Methodology opens and shows factor assumptions.
+10. Refresh preserves the selected workspace locally.
+11. Reset deletes the local state.
+12. The mobile layout has no horizontal overflow.
 
 ## 5. Final pre-submission commands
 

@@ -22,18 +22,22 @@ Ask:
 
 Explain that responses are deterministic, inspectable and based on recorded activities—not an exposed LLM key.
 
-## 46–61 seconds — Decision support
+## 46–61 seconds — Behavior loop
 
-Open the top recommendation and its “Why this” rationale. Change the what-if scenario and repeat frequency. Mention that weekly calculations use only the latest seven-day activity window, preventing old history from inflating savings.
+Open the top recommendation and its “Why this” rationale. Click **Commit** to turn it into a weekly action. Point out the contextual nudge, then mark it completed. This shows behavior change instead of passive advice.
 
-## 61–75 seconds — Engineering evidence
+## 61–68 seconds — Decision support
+
+Change the what-if scenario and repeat frequency. Mention that weekly calculations use only the latest seven-day activity window, preventing old history from inflating savings.
+
+## 68–75 seconds — Engineering evidence
 
 Mention:
 
 - Date-aware browser-only storage
 - No account, analytics or API secret
 - Validation of untrusted stored data
-- 29 automated tests
+- 31 automated tests
 - Automated branch, tracked-file and repository-size checks
 - axe-core accessibility checks
 - Public React/TypeScript source and Vercel deployment

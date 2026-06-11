@@ -79,3 +79,17 @@ describe('accessible evaluator flow', () => {
     expect(report.violations).toEqual([]);
   });
 });
+
+  it('turns a recommendation into a weekly action and tracks completion', async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole('button', { name: /explore with sample data/i }));
+    await user.click(screen.getByRole('button', { name: /commit to/i }));
+
+    expect(screen.getByText(/active this week/i)).toBeInTheDocument();
+    expect(screen.getByText(/contextual nudge/i)).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: /mark completed/i }));
+    expect(screen.getByText(/completed/i)).toBeInTheDocument();
+  });
